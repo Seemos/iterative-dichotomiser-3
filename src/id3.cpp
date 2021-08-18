@@ -97,6 +97,16 @@ unsigned get_majority_class(std::vector<std::vector<double>>& dataset){
     return (unsigned) majority_class;
 }
 
+double calculate_accuracy(id3& tree, std::vector<std::vector<double>>& dataset){
+    unsigned label_index = dataset[0].size()-1;
+    unsigned num_total = dataset.size();
+    unsigned num_correct = 0;
+    for(auto& datapoint : dataset){
+        if(datapoint[label_index] == query_id3(tree, datapoint)) num_correct++;
+    }
+    return (double)num_correct/num_total;
+}
+
 unsigned query_id3(id3& tree, std::vector<double> datapoint){
     unsigned node_index = 0;
     int feature_index = 0;

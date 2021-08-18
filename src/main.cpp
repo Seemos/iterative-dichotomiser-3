@@ -26,5 +26,6 @@ int main(){
     for(auto& datapoint : dataset){
         printf("Predicted: %i\n", query_id3(tree, datapoint));
     }
+    printf("Accuracy: %lf\n", calculate_accuracy(tree, dataset));
     return 0;
 }
