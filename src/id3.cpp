@@ -14,7 +14,7 @@ void build_id3(id3& tree, std::vector<std::vector<double>>& dataset){
 // - leaf nodes use the feature vector for storing the class
 //   in order to separate leaf nodes from decision nodes,
 //   the class is stored as -(majority_class + 1)
-void grow_id3(id3& tree, unsigned current_depth, std::vector<std::vector<double>> dataset){
+void grow_id3(id3& tree, unsigned current_depth, std::vector<std::vector<double>>& dataset){
     if(dataset.size() >= tree.min_samples && current_depth < tree.max_depth && !is_pure(dataset)){
         double best_threshold = 0;
         unsigned best_index = 0;
@@ -107,7 +107,7 @@ double calculate_accuracy(id3& tree, std::vector<std::vector<double>>& dataset){
     return (double)num_correct/num_total;
 }
 
-unsigned query_id3(id3& tree, std::vector<double> datapoint){
+unsigned query_id3(id3& tree, std::vector<double>& datapoint){
     unsigned node_index = 0;
     int feature_index = 0;
     double feature_threshold = 0;

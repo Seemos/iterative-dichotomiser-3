@@ -13,9 +13,9 @@ typedef struct{
 }id3;
 
 void build_id3(id3& tree, std::vector<std::vector<double>>& dataset);
-void grow_id3(id3& tree, unsigned current_depth, std::vector<std::vector<double>> dataset);
+void grow_id3(id3& tree, unsigned current_depth, std::vector<std::vector<double>>& dataset);
 void set_split_details(std::vector<std::vector<double>>& dataset, unsigned& best_index, double& best_threshold);
-unsigned query_id3(id3& tree, std::vector<double> datapoint);
+unsigned query_id3(id3& tree, std::vector<double>& datapoint);
 unsigned get_majority_class(std::vector<std::vector<double>>& dataset);
 double entropy(std::vector<std::vector<double>>& dataset);
 double calculate_accuracy(id3& tree, std::vector<std::vector<double>>& dataset);
