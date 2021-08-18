@@ -29,5 +29,5 @@ Assuming that "blue" is encoded as 0 (transformed to -1) and "red" is encoded as
 The datapoint d = {2.3, 5.5, 1.8, 2.6, 0.9} needs to be classified. Starting with the first node at the index 0.
 - The value of *features[0]* = 3, meaning that it is a valid index and therefore it is a decision node. We then proceed to check whether the condition of the node is satisfied. *datapoint[3] > thresholds[0]* means that the condition is satisfied and the index is simply incremented by 1. 
 - The value of *features[1]* = 4, meaning that the current node is a decision node. However, *datapoint[4] < thresholds[1]*. This means that the condition is not satisfied and that we have to jump to the index *jumps[1] = 3*.
-- The value of *features[3] = -2* is lower and can therefore not be used to index a feature, which means that it is a leaf node.
+- The value of *features[3] = -2* is lower than 0 and can therefore not be used to index a feature, which means that it is a leaf node.
 - Using *-(feature+1)*, we get class 1. d therefore belongs to "red"
