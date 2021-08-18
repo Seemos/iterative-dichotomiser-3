@@ -9,7 +9,7 @@ The basic idea is that the 2 dimensional tree structure (left) can be reduced to
 
 A tree in the 2 dimensional structure needs node objects to store this information with references to the child nodes as connections. 
 
-Since all nodes in the 1 dimensional representation can be easily indexed *[0..n]*. Since satisfying the condition for a given decision node with index m simply leads to the node with the index m+1, only one integer number is needed for decision nodes to store the "jumps".
+Since all nodes in the 1 dimensional representation can be easily indexed *[0..n]* and satisfying the condition for a given decision node with index m simply leads to the node with the index m+1, only one integer number is needed for decision nodes to store the "jumps".
 
 Class, feature and threshold are also stored as single numbers. However, as classification uses class labels from 0 to number of classes - 1, the amount of variables needed to be stored can be further reduced by combining the class and feature. For doing so the formula *-(label + 1)* is used meaning that for the lowest class label (0) a negative and therefore invalid feature index is calculated. When looking at the feature/class value, the program is then able to determine whether it has reached a leaf node.
 
@@ -31,3 +31,12 @@ The datapoint d = {2.3, 5.5, 1.8, 2.6, 0.9} needs to be classified. Starting wit
 - The value of *features[1]* = 4, meaning that the current node is a decision node. However, *datapoint[4] < thresholds[1]*. This means that the condition is not satisfied and that we have to jump to the index *jumps[1] = 3*.
 - The value of *features[3] = -2* is lower than 0 and can therefore not be used to index a feature, which means that it is a leaf node.
 - Using *-(feature+1)*, we get class 1. d therefore belongs to "red"
+
+## Limitations
+In the worst case all child nodes (except for the nodes in the last layer) are decision nodes. This means that the number of nodes would double with each layer and lead to an exponential growth in size. Since all nodes are stored in vectors, the number of nodes can not outgrow the maximum capacity of the vectors. The maximum depth can therefore be calculated using:
+
+**maximum depth = log<sub>2</sub>(maximum capacity)**
+
+In the best case scenario, each node would grow one leaf and one decision. In that case the number of nodes would start at 1 but then grow by 2 per layer, which would lead to a linear growth and therefore allow for a much higher maximum depth.
+
+While both of these scenarios are unlikely to happen exactly as described, the restrictions above should be taken into consideration.
