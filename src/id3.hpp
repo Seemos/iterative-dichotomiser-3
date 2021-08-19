@@ -21,7 +21,7 @@ unsigned get_majority_class(std::vector<std::vector<double>>& dataset);
 double entropy(std::vector<std::vector<double>>& dataset);
 double calculate_accuracy(id3& tree, std::vector<std::vector<double>>& dataset);
 bool is_pure(std::vector<std::vector<double>>& dataset);
-std::array<std::vector<std::vector<double>>, 2> split(std::vector<std::vector<double>>& dataset, unsigned feature_index, double feature_threshold);
+
 
 
 #endif

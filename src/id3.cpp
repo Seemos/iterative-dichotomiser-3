@@ -5,6 +5,8 @@
 #include<iostream>
 #include"id3.hpp"
 
+std::array<std::vector<std::vector<double>>, 2> split(std::vector<std::vector<double>>& dataset, unsigned feature_index, double feature_threshold);
+
 // interface for recursively building the tree
 void build_id3(id3& tree, std::vector<std::vector<double>>& dataset){
     grow_id3(tree, 0, dataset);
