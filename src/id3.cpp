@@ -140,6 +140,7 @@ std::array<std::vector<std::vector<double>>, 2> split(std::vector<std::vector<do
 
 bool is_pure(std::vector<std::vector<double>>& dataset){
     unsigned size_dataset = dataset.size();
+    if(size_dataset==0) return true;
     unsigned size_datapoint = dataset[0].size();
     double first_class = dataset[0][size_datapoint-1];
     for(unsigned i = 1; i < size_dataset; i++){
