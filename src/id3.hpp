@@ -1,5 +1,6 @@
 #include<vector>
 #include<array>
+#include <tuple> 
 
 #ifndef ID3_HPP
 #define ID3_HPP
@@ -14,7 +15,7 @@ typedef struct{
 
 void build_id3(id3& tree, std::vector<std::vector<double>>& dataset);
 void grow_id3(id3& tree, unsigned current_depth, std::vector<std::vector<double>>& dataset);
-void set_split_details(std::vector<std::vector<double>>& dataset, unsigned& best_index, double& best_threshold);
+std::tuple<unsigned, double> get_split_details(std::vector<std::vector<double>>& dataset);
 unsigned query_id3(id3& tree, std::vector<double>& datapoint);
 unsigned get_majority_class(std::vector<std::vector<double>>& dataset);
 double entropy(std::vector<std::vector<double>>& dataset);

@@ -16,10 +16,8 @@ void build_id3(id3& tree, std::vector<std::vector<double>>& dataset){
 //   the class is stored as -(majority_class + 1)
 void grow_id3(id3& tree, unsigned current_depth, std::vector<std::vector<double>>& dataset){
     if(dataset.size() >= tree.min_samples && current_depth < tree.max_depth && !is_pure(dataset)){
-        double best_threshold = 0;
-        unsigned best_index = 0;
         unsigned node_index = tree.feature_indicies.size();
-        set_split_details(dataset, best_index, best_threshold);
+        const auto[best_index, best_threshold] = get_split_details(dataset);
         auto datasets = split(dataset, best_index, best_threshold);
         
         tree.feature_indicies.push_back(best_index);
@@ -42,7 +40,9 @@ void grow_id3(id3& tree, unsigned current_depth, std::vector<std::vector<double>
 // sets the values of best_index and best_threshold
 // so that the entropy loss / the information gain
 // on the dataset is maximized
-void set_split_details(std::vector<std::vector<double>>& dataset, unsigned& best_index, double& best_threshold){
+std::tuple<unsigned, double> get_split_details(std::vector<std::vector<double>>& dataset){
+    unsigned best_index = 0;
+    double best_threshold = 0;
     double e_c = entropy(dataset);
     double max_gain = 0;
     std::array<std::vector<std::vector<double>>,2> datasets;
@@ -60,6 +60,7 @@ void set_split_details(std::vector<std::vector<double>>& dataset, unsigned& best
             }
         }
     }
+    return std::make_tuple(best_index, best_threshold);
 }
 
 double entropy(std::vector<std::vector<double>>& dataset){
